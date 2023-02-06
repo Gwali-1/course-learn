@@ -7,8 +7,7 @@ function ExpenseItem({ date, title, amount }) {
   const [heading, setTitle] = useState(title);
 
   const changeTitle = function () {
-    let titlee = "update" + Math.trunc(Math.random() * 30);
-    setTitle(titlee);
+    setTitle("updated");
   };
 
   return (
