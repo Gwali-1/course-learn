@@ -17,7 +17,7 @@ function ExpenseForm() {
   });
 
   const titleChangeHandler = function (event) {
-    console.log(event.target.value.lenght);
+    console.log(event.target.value.length);
     setUserEntry((prevState) => {
       return {
         ...prevState,
@@ -39,12 +39,21 @@ function ExpenseForm() {
     setUserEntry((prevState) => {
       return {
         ...prevState,
-        enteredDate: event.target.value,
+        enteredDate: new Date(event.target.value),
       };
     });
   };
+
+  const submitHandler = function (event) {
+    event.preventDefault();
+    const data = {
+      ...userEntry,
+    };
+
+    console.log(data);
+  };
   return (
-    <form>
+    <form onSubmit={submitHandler}>
       <div className="new-expense___controls">
         <div className="new-expense__control">
           <label>Title</label>
