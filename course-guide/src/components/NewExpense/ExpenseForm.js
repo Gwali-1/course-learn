@@ -1,7 +1,7 @@
 import "./ExpenseForm.css";
 import React, { useState } from "react";
 
-function ExpenseForm() {
+function ExpenseForm(props) {
   //   multiple state approach
 
   //   const [enteredTitle,setEnteredTitile] = useState("");
@@ -17,7 +17,6 @@ function ExpenseForm() {
   });
 
   const titleChangeHandler = function (event) {
-    console.log(event.target.value.length);
     setUserEntry((prevState) => {
       return {
         ...prevState,
@@ -39,38 +38,55 @@ function ExpenseForm() {
     setUserEntry((prevState) => {
       return {
         ...prevState,
-        enteredDate: new Date(event.target.value),
+        enteredDate: event.target.value,
       };
     });
   };
 
   const submitHandler = function (event) {
     event.preventDefault();
-    const data = {
-      ...userEntry,
+
+    const expenseData = {
+      amount: userEntry.enteredAmount,
+      title: userEntry.enteredTitle,
+      date: new Date(userEntry.enteredDate),
     };
 
-    console.log(data);
+    console.log(expenseData);
+
+    props.onSaveExpenseData(expenseData);
+
+    setUserEntry({
+      enteredAmount: "",
+      enteredTitle: "",
+      enteredDate: "",
+    });
   };
   return (
     <form onSubmit={submitHandler}>
       <div className="new-expense___controls">
         <div className="new-expense__control">
           <label>Title</label>
-          <input type="text" onChange={titleChangeHandler} />
+          <input
+            type="text"
+            value={userEntry.enteredTitle}
+            onChange={titleChangeHandler}
+          />
         </div>
         <div className="new-expense__control">
           <label>Amount</label>
           <input
+            value={userEntry.enteredAmount}
             type="number"
             min="0.01"
-            max="0.01"
+            step="0.01"
             onChange={amountChangeHandler}
           />
         </div>
         <div className="new-expense__control">
           <label>Date</label>
           <input
+            value={userEntry.enteredDate}
             type="date"
             min="2019-01-01"
             max="2022-12-31"
