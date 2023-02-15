@@ -1,0 +1,10 @@
+.modal-box {
+  width: 60%;
+  padding: 3px;
+  background-color: green;
+  color: red;
+  margin: 0px auto 0px auto;
+}
+.modal-box p {
+  text-align: center;
+}
