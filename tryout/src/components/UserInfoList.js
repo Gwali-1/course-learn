@@ -1,11 +1,11 @@
 import "./UserInfoList.css";
-
+import UserItem from "./UserItem";
 function UserInfoList(props) {
   return (
     <>
       <ul>
         {props.userInfo.map((info) => {
-          return <li className="user-info">{info}</li>;
+          return <UserItem key={Math.random() * 100}>{info}</UserItem>;
         })}
       </ul>
     </>

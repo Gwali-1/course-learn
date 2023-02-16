@@ -43,7 +43,7 @@ function UserInput(props) {
   };
 
   return (
-    <div>
+    <div className="input-cont">
       <form onSubmit={addUserHandler}>
         <div className="user-input-name">
           <label htmlFor="name">Name:</label>
