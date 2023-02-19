@@ -1,26 +1,32 @@
 import "./UserInput.css";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 ///
 function UserInput(props) {
+  const nameInputRef = useRef();
+  const ageInputRef = useRef();
+
   const [userInputs, setUserInputs] = useState({
     name: "",
     age: "",
   });
 
   const addUserHandler = function (event) {
+    const enteredName = nameInputRef.current.value;
+    const enteredAge = ageInputRef.current.value;
     event.preventDefault();
     console.log("form submitted");
 
-    if (isNaN(+userInputs.age) || parseInt(userInputs.age) < 0) {
+    if (isNaN(+enteredAge) || parseInt(enteredAge) < 0) {
       return props.addUser("Ivalid age input");
     }
 
-    if (userInputs.name.length === 0 || userInputs.age.length === 0) {
+    if (enteredName.length === 0 || enteredAge.length === 0) {
       return props.addUser("No Values provided");
     }
 
     props.addUser(userInputs);
+
     setUserInputs({
       name: "",
       age: "",
@@ -52,6 +58,7 @@ function UserInput(props) {
             value={userInputs.name}
             onChange={nameInputHandler}
             id="name"
+            ref={nameInputRef}
           ></input>
         </div>
 
@@ -62,6 +69,7 @@ function UserInput(props) {
             value={userInputs.age}
             onChange={ageInputHandler}
             id="age"
+            ref={ageInputRef}
           ></input>
         </div>
         <div className="user-input-button">

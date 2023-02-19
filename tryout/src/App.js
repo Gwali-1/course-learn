@@ -2,6 +2,7 @@ import "./App.css";
 import UserInfoList from "./components/UserInfoList";
 import UserInput from "./components/UserInput";
 import ModalWarn from "./components/ModalWarn";
+import Wrapper from "./components/helpers/Wrapper";
 import { useState } from "react";
 
 function App() {
@@ -35,10 +36,10 @@ function App() {
     content = <ModalWarn modalTogle={toggleModal}>{error}</ModalWarn>;
   }
   return (
-    <div>
+    <Wrapper>
       <UserInput addUser={addNewUser} />
       {content}
-    </div>
+    </Wrapper>
   );
 }
 
