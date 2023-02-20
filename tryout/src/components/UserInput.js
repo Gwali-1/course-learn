@@ -27,6 +27,8 @@ function UserInput(props) {
 
     props.addUser(userInputs);
 
+    //
+
     setUserInputs({
       name: "",
       age: "",
