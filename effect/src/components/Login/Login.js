@@ -41,21 +41,18 @@ const Login = (props) => {
     value: "",
     isValid: null,
   });
-  // useEffect(() => {
-  //   console.log("check effect running");
-  // }, [emailIsValid]);
 
-  // useEffect(() => {
-  //   const validity = setTimeout(() => {
-  //     setFormIsValid(
-  //       enteredEmail.includes("@") && enteredPassword.trim().length > 6
-  //     );
-  //   }, 500);
+  const { isValid: emailIsValid } = emailState;
+  const { isValid: passwordIsValid } = passwordState;
+  useEffect(() => {
+    const validity = setTimeout(() => {
+      setFormIsValid(emailIsValid && passwordIsValid);
+    }, 500);
 
-  //   return () => {
-  //     clearTimeout(validity);
-  //   };
-  // }, [enteredEmail, enteredPassword]);
+    return () => {
+      clearTimeout(validity);
+    };
+  }, [emailIsValid, passwordIsValid]);
 
   const emailChangeHandler = (event) => {
     dispatchEmail({
@@ -121,11 +118,7 @@ const Login = (props) => {
           />
         </div>
         <div className={classes.actions}>
-          <Button
-            type="submit"
-            className={classes.btn}
-            disabled={!(emailState.isValid && passwordState.isValid)}
-          >
+          <Button type="submit" className={classes.btn} disabled={!formIsValid}>
             Login
           </Button>
         </div>
