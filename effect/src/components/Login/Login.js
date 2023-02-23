@@ -5,7 +5,6 @@ import classes from "./Login.module.css";
 import Button from "../UI/Button/Button";
 
 const emailReducer = (state, action) => {
-  console.log(action);
   if (action.type === "EMAIL_INPUT") {
     return { value: action.val, isValid: action.val.includes("@") };
   }
@@ -46,8 +45,9 @@ const Login = (props) => {
   const { isValid: passwordIsValid } = passwordState;
   useEffect(() => {
     const validity = setTimeout(() => {
+      console.log("tick");
       setFormIsValid(emailIsValid && passwordIsValid);
-    }, 500);
+    }, 50);
 
     return () => {
       clearTimeout(validity);
